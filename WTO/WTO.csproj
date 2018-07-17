@@ -547,6 +547,7 @@
     <Content Include="contents\js\Script.js" />
     <Content Include="contents\js\treeview.js" />
     <Content Include="contents\js\Validation.js" />
+    <Content Include="index.html" />
     <Content Include="JQuery\AddUpdateNotification.js" />
     <Content Include="contents\js\WTOHTMLJS.js" />
     <Content Include="Content\Site.css" />
