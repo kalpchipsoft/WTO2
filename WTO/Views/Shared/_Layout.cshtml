@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/contents/css/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/contents/css/css/style.min.css" rel="stylesheet" />
+    <link href="~/contents/css/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/contents/css/css/comman.css?v=1" rel="stylesheet" />
+    <link href="~/contents/css/css/wto.css?v=1" rel="stylesheet" />
+    <link href="~/contents/css/css/CustomAlert.css" rel="stylesheet" />
+    <script src="~/contents/js/jquery.min.js"></script>
+    <script src="~/contents/js/bootstrap.js"></script>
+    <script src="~/contents/js/jstree.min.js"></script>
+    <script src="~/contents/js/jquery-ui.js"></script>
+    <script src="~/contents/js/WTOHTMLJS.js?v=2"></script>
+    <script src="~/contents/js/Validation.js"></script>
+    <script src="~/contents/js/CustomAlert.js"></script>
+    <script src="~/contents/js/autosize.min.js"></script>
+    <script src="~/JQuery/master.js"></script>
+</head>
+<body>
+    <div id="wrapper" class="">
+        <div id="page-content-wrapper">
+            <!-- menu section start -->
+            <nav class="navbar navbar-default wto-menu">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <button type="button" class="hamburger animated fadeInLeft" id="toggleOpenClose" data-toggle="offcanvas">
+                            <span class="hamb-top"></span>
+                            <span class="hamb-middle"></span>
+                            <span class="hamb-bottom"></span>
+                        </button>
+                        <a class="navbar-brand MenuHeading default-pointer">SPS/ TBT Notification Management System</a>
+                    </div>
+                    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                        <ul class="nav sidebar-nav">
+                            <button type="button" class="hamburger small-hamburger animated fadeInLeft is-closed visible-xs" data-toggle="offcanvas">
+                                <span class="hamb-top"></span>
+                                <span class="hamb-middle"></span>
+                                <span class="hamb-bottom"></span>
+                            </button>
+                            <li class="sidebar-brand">
+                                <a href="#" class="bottom-offset-20">
+                                    <img src="~/contents/img/wto-logo.png" alt="WTOlogo" class="WTOlogo img-responsive " />
+                                </a>
+                            </li>
+                            <li class="list dashboard" style="margin-top:-5px;">
+                                <a href="~/WTO/WTODashboard">
+                                    <img src="~/contents/img/dashboard1.png" alt="dashboard" /><span class="submenulist">Dashboard</span>
+                                </a>
+                            </li>
+
+                            <li class="list dropdown notification">
+                                <a class="dropdown-toggle drop" data-toggle="dropdown" href="#">
+                                    <img src="~/contents/img/drpoNotification.png" /> <span class="submenulist">Notification</span><span class="caret pull-right" style="margin-top:7px;"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="list addnotification">
+                                        <a href="@Url.Action("Edit_Notification", "AddNotification", new { Id = 0 })">
+                                            <img src="~/contents/img/Addnotification1.png" alt="Addnotification" /><span class="submenulist">Add Notification</span>
+                                        </a>
+                                    </li>   
+                                    <li class="list notificationlist">
+                                        <a href="@Url.Action("Index", "NotificationList", new { PageIndex = 1, PageSize = 10 })">
+                                            <img src="~/contents/img/notification.png" alt="notification" /><span class="submenulist">Notification List</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list dropdown meeting">
+                                <a class="dropdown-toggle drop" data-toggle="dropdown" href="#">
+                                    <img src="~/contents/img/mettings.png" /> <span class="submenulist" style="margin-left:10px;">Meetings</span><span class="caret pull-right" style="margin-top:7px;"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="list addmeeting">
+                                        <a href="@Url.Action("Add", "MoM", new { Id = 0 })">
+                                            <img src="~/contents/img/AddMOM.png" alt="Addnotification" /><span class="submenulist">Schedule meeting</span>
+                                        </a>
+                                    </li>
+                                    <li class="list currentmeeting">
+                                        <a href="@Url.Action("Edit", "MoM", new { Id = 0 })">
+                                            <img src="~/contents/img/CurrentMeeting.png" width="28px" alt="Addnotification" /><span class="submenulist">Current Meeting</span>
+                                        </a>
+                                    </li>
+                                    <li class="list meetinglist">
+                                        <a href="@Url.Action("Index","MoM")">
+                                            <img src="~/contents/img/AddMOMList.png" alt="Addnotification" /><span class="submenulist">Meeting schedules</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list manageaccess">
+                                <a href="@Url.Action("Index", "ManageAccess")">
+                                    <img src="~/contents/img/manageW.png" alt="Addnotification" /><span class="submenulist">Manage</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        @{ Html.RenderAction("UserInfo", "Partial"); }
+                    </div>
+                </div>
+            </nav>
+            <!-- menu section End -->
+            @RenderBody()
+        </div>
+    </div>
+    <script>
+        myWTOAPP.init('@ViewContext.RouteData.Values["id"]', '@Session["UserId"]', '@Session["UserRole"]');
+    </script>
+    @RenderSection("scripts", required: false)
+
+    <input id="hdnNoProgress" type="hidden" value="0" />
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>
+</body>
+</html>
